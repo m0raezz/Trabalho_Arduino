@@ -1,0 +1,102 @@
+//Declaração das variáveis
+byte leds[] = {2, 4, 6};
+int trigger = 5;
+int echo = 10;
+int distancia = 0;
+byte vermelho = 6;
+byte amarelo = 2;
+byte verde = 4;
+
+// Inicialização das variáveis
+void setup() {
+  for (int i = 0; i <= sizeof(leds); i++) {
+      pinMode(leds[i], OUTPUT);
+  }  
+  pinMode(trigger, OUTPUT);
+   pinMode(echo, INPUT);
+   
+    pinMode(vermelho, OUTPUT);
+     pinMode(amarelo, OUTPUT);
+      pinMode(verde, OUTPUT);
+      
+   //Iniciar o motor
+  Serial.begin(9600);
+}
+
+
+// Execução
+void loop() {
+calibra_sensor();
+  distancia = pulseIn(echo,1);
+
+
+
+   distancia = distancia / 60;  
+    Serial.print("distancia: ");
+      Serial.print(distancia);
+    Serial.println(" cm.");
+
+
+
+ if (distancia >= 20 and distancia < 100){
+  digitalWrite (vermelho, 1);
+  delay (10);
+  digitalWrite (amarelo, 0);
+  delay (10);
+  digitalWrite (verde, 0);
+  delay (10);
+  }
+  
+  else if(distancia >= 100 and distancia < 200){
+  digitalWrite (amarelo, 1);
+  delay (10);
+  digitalWrite (vermelho, 0);
+  delay (10);
+  digitalWrite (verde, 0);
+  delay (10);
+  }
+  
+  else if(distancia >= 200){
+  digitalWrite (verde, 1);
+  delay (10);
+  digitalWrite (amarelo, 0);
+  delay (10);
+  digitalWrite (vermelho, 0);
+  delay (10);
+  }
+  else if (distancia < 20){
+  digitalWrite (verde, 1);
+  delay (10);
+  digitalWrite (amarelo, 1);
+  delay (10);
+  digitalWrite (vermelho, 1);
+  delay(10);
+
+
+
+   digitalWrite (verde, 0);
+  delay (10);
+  digitalWrite (amarelo, 0);
+  delay (10);
+  digitalWrite (vermelho, 0);
+  delay(10);
+
+
+
+ 
+  }
+}
+
+
+
+void calibra_sensor()
+{
+digitalWrite(trigger, 0);
+delay(10);
+digitalWrite(trigger, 1);
+delay(10);
+digitalWrite(trigger, 0);
+
+
+
+}
