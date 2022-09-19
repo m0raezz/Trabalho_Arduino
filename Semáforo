@@ -1,0 +1,88 @@
+//Declaração de variaveis
+
+
+
+
+byte ledA = 13;
+byte ledB = 11;
+byte ledC = 9;
+byte ledP = 4;
+byte ledPP = 3;
+int Bot = 7;
+int estadoB = 0;
+
+
+
+//Inicialização de variavel
+
+
+
+void setup() {
+  
+  pinMode(ledA,OUTPUT);
+  pinMode(ledB,OUTPUT);
+  pinMode(ledC,OUTPUT);
+  pinMode(ledP,OUTPUT);
+  pinMode(ledPP,OUTPUT);
+  
+  pinMode(Bot,INPUT);
+  Serial.begin(9600);
+}
+
+
+
+//Instruções
+
+
+
+
+
+ 
+void loop() {
+  
+  Serial.println ("Semeforo normal");
+  
+  digitalWrite(ledP,1);
+  estadoB = digitalRead(Bot);
+  
+  if (estadoB == 0){
+   
+  digitalWrite(ledA,1);//HIGH
+  delay(1200);
+  digitalWrite(ledA,0);//LOW
+  delay(1200);
+  
+  
+  
+  
+  digitalWrite(ledB,1);//HIGH
+  delay(1100);
+  digitalWrite(ledB,0);//LOW
+  delay(1100);
+  
+  
+  
+  digitalWrite(ledC,1);//HIGH
+  delay(1200);
+  digitalWrite(ledC,0);//LOW
+  delay(1200);
+    
+  }
+  
+
+  else {
+    
+    Serial.println ("Pedestre passando");
+    
+    digitalWrite(ledP,0);
+    delay(1000);
+    digitalWrite(ledPP,1);
+    digitalWrite(ledC,1);
+    delay(5000);
+    digitalWrite(ledPP,0);
+      digitalWrite(ledC,0);
+   
+  }
+  
+  
+}
